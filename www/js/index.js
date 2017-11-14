@@ -28,7 +28,10 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        alert(new Date().toLocale())
+        var date = this.date();
+        var heure = this.heure();
+        date = date + " - " + heure;
+        alert(date);
     },
 
     // Update DOM on a Received Event
@@ -41,6 +44,38 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    date: function dateFr()
+    {
+        // les noms de jours / mois
+        var jours = new Array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+        var mois = new Array("janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre");
+        // on recupere la date
+        var date = new Date();
+        // on construit le message
+        var message = jours[date.getDay()] + " ";   // nom du jour
+        message += date.getDate() + " ";   // numero du jour
+        message += mois[date.getMonth()] + " ";   // mois
+        message += date.getFullYear();
+        return message;
+    },
+
+    heure: function heure()
+    {
+         var date = new Date();
+         var heure = date.getHours();
+         var minutes = date.getMinutes();
+         if(minutes < 10)
+              minutes = "0" + minutes;
+         if (heure < 10)
+              heure = "0" + heure;  
+         return heure + "h" + minutes;
+    },
+
+    alarm: function alarm()
+    {
+
     }
 };
 
